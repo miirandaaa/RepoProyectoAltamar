@@ -1,0 +1,17 @@
+version: '3'
+services:
+  frontend:
+    image: agustinadiaz/react-nginx-app:latest  # La imagen que subiste a Docker Hub
+    ports:
+      - "80:80"  # El frontend se ejecutará en el puerto 80
+    depends_on:
+      - backend  # El frontend depende del backend
+
+  backend:
+    build: ./  # Esto construirá el backend desde el Dockerfile localmente
+    ports:
+      - "8001:8000"  # El backend estará accesible en el puerto 8000
+    volumes:
+      - .:/app  # Mantener el código en la carpeta app
+    environment:
+      FLASK_ENV: development
